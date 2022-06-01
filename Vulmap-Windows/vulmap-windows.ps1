@@ -100,6 +100,11 @@
     .LINK
     https://github.com/vulmon
     https://vulmon.com
+    
+    Removed param options to download exploits:
+    [string] $DownloadExploit,
+    [switch] $DownloadAllExploits,
+    
     #>
 
     [CmdletBinding()]
@@ -107,8 +112,6 @@
         [ValidateSet('Default', 'CollectInventory')]
         [string] $Mode = 'Default',
         [switch] $OnlyExploitableVulns,
-        [string] $DownloadExploit,
-        [switch] $DownloadAllExploits,
         [switch] $SaveInventoryFile,
         [switch] $ReadInventoryFile,
         [string] $InventoryOutFile = 'inventory.json',
@@ -271,7 +274,7 @@
         if ($DownloadAllExploits) {
             foreach ($exp in $vuln_list) {
                 $exploit_id = $exp.ExploitID
-                Get-Exploit $exploit_id
+                #Get-Exploit $exploit_id
             }
         }
 
@@ -323,7 +326,7 @@
 
     if ($DownloadExploit) {
         Write-Host 'Downloading exploit...'
-        Get-Exploit $DownloadExploit
+        #Get-Exploit $DownloadExploit
     }
     else {
         $inventory_json = Get-Inventory
